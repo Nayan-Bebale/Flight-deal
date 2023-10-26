@@ -43,7 +43,7 @@ class FlightSearch:
         )
 
         ##################
-        try:
+                try:
             data = response.json()["data"][0]
         except IndexError:
             query["max_stopovers"] = 3
@@ -62,6 +62,7 @@ class FlightSearch:
                 destination_airport=data["route"][1]["flyTo"],
                 out_date=data["route"][0]["local_departure"].split("T")[0],
                 return_date=data["route"][2]["local_departure"].split("T")[0],
+                deep_link=data['deep_link'],
                 stop_overs=1,
                 via_city=data["route"][0]["cityTo"]
             )
@@ -73,11 +74,12 @@ class FlightSearch:
                 origin_airport=data["route"][0]["flyFrom"],
                 destination_city=data["route"][0]["cityTo"],
                 destination_airport=data["route"][0]["flyTo"],
+                deep_link=data['deep_link'],
                 out_date=data["route"][0]["local_departure"].split("T")[0],
                 return_date=data["route"][1]["local_departure"].split("T")[0]
+
             )
             return flight_data
-        #######################
 
 
 # fs = FlightSearch()
